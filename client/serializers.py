@@ -11,7 +11,6 @@ class HomeHhSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
         read_only=True,

@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 
 class Applicant(models.Model):
+    '''
+    Модель для соискателя
+    '''
     name = models.CharField(max_length=20)
     surname = models.CharField(max_length=20)
     patronymic = models.CharField(max_length=60)
@@ -19,7 +22,11 @@ class Applicant(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='Автор')
 
+
 class Follow(models.Model):
+    '''
+    Модель для отклтка
+    '''
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         User,

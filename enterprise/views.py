@@ -1,28 +1,25 @@
-from django.contrib.auth.models import User
-from rest_framework.views import APIView
+# from django.contrib.auth.models import User
+# from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
-from django.shortcuts import render
-from rest_framework.response import Response
-from django.db.models import Q
+# from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
+# from django.shortcuts import render
+# from rest_framework.response import Response
+# from django.db.models import Q
 from rest_framework.generics import RetrieveUpdateAPIView, ListCreateAPIView, RetrieveDestroyAPIView
 
 
-from .models import Employer, About
-from .serializers import  MyVacancySerializer, CompanySerializer
+from .models import About
+from .serializers import MyVacancySerializer, CompanySerializer
 from .permissions import IsOwnerOrReadOnly
-
-# class TransactionsTemplateHTMLRender(TemplateHTMLRenderer):
-#     def get_template_context(self, data, renderer_context):
-#         data = super().get_template_context(data, renderer_context)
-#         if not data:
-#             return {}
-#         else:
-#             return data
 
 
 
 class Home(ReadOnlyModelViewSet):
+    '''
+    Контроллер для просмотра всех вакансий
+    
+    Если разкоментировать то контроллер сможет подкинуть HTML
+    '''
     # renderer_classes = (TemplateHTMLRenderer, )
     # template_name = 'aaaaaaa.html'
     queryset = About.objects.all()
@@ -36,6 +33,9 @@ class Home(ReadOnlyModelViewSet):
 
 
 class MyVacancy(ListCreateAPIView):
+    '''
+    Контроллер для просмотра и создания вакансий.
+    '''
     #renderer_classes = (TemplateHTMLRenderer, JSONRenderer)
     #template_name = 'video_hosting/home.html'
     #user = self.request.user
@@ -58,9 +58,17 @@ class MyVacancy(ListCreateAPIView):
 
 
 class PutchVacancy(RetrieveUpdateAPIView):
+    '''
+    Контроллер для просмотра и изменения вакансий.
+    '''
     queryset = About.objects.all()
     serializer_class = CompanySerializer
+    permissions_classes = (IsOwnerOrReadOnly, )
 
 class DeleteVacancy(RetrieveDestroyAPIView):
+    '''
+    Контроллер для просмотра и удаления вакансий.
+    '''
     queryset = About.objects.all()
     serializer_class = MyVacancySerializer
+    permissions_classes = (IsOwnerOrReadOnly, )

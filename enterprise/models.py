@@ -6,9 +6,10 @@ from phonenumber_field.modelfields import PhoneNumberField # Форма для �
 #from markdown import markdown
 
 
-    
-    
 class Employer(models.Model):
+    '''
+    Модель зарегистрированной компании.
+    '''
     employer_name = models.CharField(max_length=100) # Название работодателя
     number_of_employees = models.IntegerField(null=True) # кол-во работников
     address = models.CharField(max_length=100) # Адрес
@@ -21,8 +22,10 @@ class Employer(models.Model):
         return self.employer_name
 
 
-
 class About(models.Model):
+    '''
+    Модель вакансии.
+    '''
     BACKEND = 'Backend-разработчик'
     FRONTEND = 'Frontend-разработчик'
     DATA_SCIENCE = 'Data Science'
@@ -36,5 +39,5 @@ class About(models.Model):
     about_compony = models.TextField(max_length=300)  # О вакансии
     salary = models.IntegerField(null=True)  # Сумма вознаграждения
     specialist = models.CharField(max_length=40, choices=DECISION, default=DEFAULT)  # Выбор специалиста
-    company = models.ForeignKey(Employer, verbose_name='Компания', on_delete=models.CASCADE)
+    company = models.ForeignKey(Employer, verbose_name='Компания', on_delete=models.CASCADE) # Связь с компанией
     
