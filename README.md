@@ -19,7 +19,7 @@ API реализован на основе  DRF.
 1. Клонируйте репозиторий и перейдите в него в командной строке:
 
 ```
-git clone https://github.com/Knoxvillys/scv_test.git
+git clone https://github.com/Knoxvillys/hh_test.git
 ```
 
 ```
